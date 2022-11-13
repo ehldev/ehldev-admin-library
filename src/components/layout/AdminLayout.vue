@@ -15,8 +15,6 @@
     </div>
 
     <main class="main" :class="{ 'show-sidebar': showSidebar }">
-      <AdminHeader @toggleSidebar="showSidebar = !showSidebar" />
-
       <section class="content">
         <slot name="main"></slot>
       </section>
@@ -25,7 +23,6 @@
 </template>
 
 <script>
-import AdminHeader from './AdminHeader'
 import AdminSidebar from "./AdminSidebar";
 
 export default {
@@ -41,8 +38,7 @@ export default {
     navItems: Array
   },
   components: {
-    AdminSidebar,
-    AdminHeader,
+    AdminSidebar
   },
   methods: {
     calcResize() {

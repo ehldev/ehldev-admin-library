@@ -23,13 +23,14 @@
         <i class="ri-fullscreen-line"></i>
       </button>
 
-      <AdminDropdown>
+      <slot name="content"></slot>
+
+      <!-- <AdminDropdown>
         <template slot="toggle">
           <button
             type="button"
             class="dropdown-button cursor-pointer main-shadow d-flex align-items-center border-none px-2"
           >
-            <!-- <i class="ri-user-line"></i> -->
             <img
               src="http://nazox.vuejs-light.themesdesign.in/img/avatar-4.e0ab315a.jpg"
               alt=""
@@ -45,21 +46,19 @@
           <a href="" class="admin-dropdown-item">Editar</a>
           <a href="" class="admin-dropdown-item">Eliminar</a>
         </template>
-      </AdminDropdown>
+      </AdminDropdown> -->
     </div>
   </header>
 </template>
 
 <script>
 import AdminSearch from '../common/AdminSearch'
-import AdminDropdown from '../common/AdminDropdown'
 import AdminToggleMenuIcon from '../icons/AdminToggleMenuIcon'
 
 export default {
   name: "AdminHeader",
   components: {
     AdminSearch,
-    AdminDropdown,
     AdminToggleMenuIcon
   },
   methods: {
