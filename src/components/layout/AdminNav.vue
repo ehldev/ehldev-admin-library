@@ -159,7 +159,7 @@ export default {
     padding: 8px 16px;
     margin-bottom: 0;
     border-radius: 9px;
-    box-shadow: 0px 0px 5px -1px rgba(var(--color-primary), 0.3) !important;
+    box-shadow: 0px 0px 5px -1px rgba(var(--admin-color-primary), 0.3) !important;
 
     &.active {
       background-color: rgba(white, 0.01) !important;
@@ -185,7 +185,7 @@ export default {
     }
 
     &.active {
-      color: var(--color-primary) !important;
+      color: var(--admin-color-primary) !important;
       font-weight: 500;
     }
 
@@ -212,7 +212,7 @@ export default {
     margin-right: 8px;
 
     &.active {
-      color: var(--color-primary);
+      color: var(--admin-color-primary);
     }
   }
 
