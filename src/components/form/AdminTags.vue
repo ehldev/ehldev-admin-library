@@ -11,12 +11,20 @@
     />
 
     <div class="mt-2">
-        <span class="admin-badge admin-badge-info mr-2 mb-2 d-flex align-items-center" v-for="(item, i) in list" :key="item">
-            {{ item }}
-            <button type="button" class="bg-transparent border-none ml-2 p-0" @click="remove(i)">
-                <i class="ri-close-circle-line"></i>
-            </button>
-        </span>
+      <span
+        class="admin-badge admin-badge-info mr-2 mb-2 d-flex align-items-center"
+        v-for="(item, i) in list"
+        :key="item"
+      >
+        {{ item }}
+        <button
+          type="button"
+          class="bg-transparent border-none ml-2 p-0"
+          @click="remove(i)"
+        >
+          <i class="ri-close-circle-line"></i>
+        </button>
+      </span>
     </div>
   </div>
 </template>
@@ -26,25 +34,40 @@ export default {
   data() {
     return {
       text: null,
-      list: []
+      list: [],
     };
   },
+  mounted() {
+    this.setOldList();
+  },
   props: {
-    showError: Boolean
+    showError: Boolean,
+    oldList: Array,
+  },
+  watch: {
+    oldList: function () {
+      if(!this.list.length) {
+        this.setOldList();
+      }
+    },
   },
   methods: {
     add() {
-        if(this.text) {
-            this.list.push(this.text)
-            this.text = null
-            this.$emit('success', this.list)
-        }
+      if (this.text) {
+        this.list.push(this.text);
+        this.text = null;
+        this.$emit("success", this.list);
+      }
     },
     remove(i) {
-        this.list.splice(i, 1)
-        this.$emit('success', this.list)
-    }
-  }
+      this.list.splice(i, 1);
+      this.$emit("success", this.list);
+    },
+    setOldList() {
+      let list = JSON.parse(JSON.stringify(this.oldList));
+      this.list.push(...list);
+    },
+  },
 };
 </script>
 

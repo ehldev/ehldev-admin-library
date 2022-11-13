@@ -1,5 +1,6 @@
 <template>
   <section class="admin-upload-widget">
+    
     <button
       type="button"
       class="preview-form-image upload-button d-flex flex-column main-shadow"
@@ -82,6 +83,14 @@ export default {
     },
     maxFiles: Number,
     showError: Boolean,
+    oldFiles: Array
+  },
+  watch: {
+    oldFiles: function () {
+      if(!this.files.length) {
+        this.setOldList();
+      }
+    },
   },
   methods: {
     openImageWidget() {
@@ -120,6 +129,10 @@ export default {
     removeItem(index) {
       this.files.splice(index, 1);
     },
+    setOldList() {
+      let list = JSON.parse(JSON.stringify(this.oldFiles));
+      this.files.push(...list);
+    }
   },
 };
 </script>
