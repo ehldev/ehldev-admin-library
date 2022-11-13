@@ -3,7 +3,7 @@
     <div class="admin-nav-list" @mouseleave="currentItem = null">
       <button
         type="button"
-        class="admin-nav-item text-left text-decoration-none w-100 border-0 position-relative cursor-pointer"
+        class="admin-nav-item text-left text-decoration-none w-100 border-none position-relative cursor-pointer"
         :class="{ active: isActive(item) }"
         v-for="(item, i) in items"
         :key="i"

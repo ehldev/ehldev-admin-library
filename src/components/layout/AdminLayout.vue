@@ -15,6 +15,8 @@
     </div>
 
     <main class="main" :class="{ 'show-sidebar': showSidebar }">
+      <slot name="header"></slot>
+      
       <section class="content">
         <slot name="main"></slot>
       </section>
