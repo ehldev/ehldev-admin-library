@@ -5,7 +5,7 @@
     <div class="d-flex">
       <button
         type="button"
-        class="border-0 bg-transparent p-0 mr-3 cursor-pointer"
+        class="border-none bg-transparent p-0 mr-3 cursor-pointer"
         @click="$emit('toggleSidebar')"
       >
         <AdminToggleMenuIcon />
