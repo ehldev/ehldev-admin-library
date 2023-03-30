@@ -1,6 +1,6 @@
 {
   "name": "ehldev-admin-library",
-  "version": "0.1.52",
+  "version": "0.1.53",
   "private": false,
   "main": "./dist/ehldev-admin-library.common.js",
   "files": [
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "js-cookie": "^3.0.1",
     "vue": "^2.6.11",
     "vuex": "^4.1.0"
   },
