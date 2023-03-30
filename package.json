@@ -1,6 +1,6 @@
 {
   "name": "ehldev-admin-library",
-  "version": "0.1.57",
+  "version": "0.1.58",
   "private": false,
   "main": "./dist/ehldev-admin-library.common.js",
   "files": [
@@ -18,7 +18,7 @@
     "js-cookie": "^3.0.1",
     "vue": "^2.6.11",
     "vuelidate": "^0.7.7",
-    "vuex": "^4.1.0"
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
