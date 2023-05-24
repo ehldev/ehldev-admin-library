@@ -1,6 +1,6 @@
 {
   "name": "ehldev-admin-library",
-  "version": "0.1.96",
+  "version": "0.1.97",
   "private": false,
   "main": "./dist/ehldev-admin-library.common.js",
   "files": [
