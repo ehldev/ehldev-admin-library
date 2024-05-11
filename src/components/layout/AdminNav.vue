@@ -78,6 +78,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -90,8 +92,7 @@ export default {
     this.calcResize();
   },
   props: {
-    items: Array,
-    showSidebar: Boolean,
+    items: Array
   },
   methods: {
     calcResize() {
@@ -131,7 +132,7 @@ export default {
       } else {
         this.$router.push({ name: item.routeName });
         if (this.device === "mobile") {
-          this.$emit("hideSidebar");
+          this.$store.commit('app/SET_SIDEBAR_STATUS', false)
         }
       }
     },
@@ -144,6 +145,11 @@ export default {
       }
     },
   },
+  computed: {
+    ...mapGetters({
+      showSidebar: "app/getSidebarStatus",
+    })
+  }
 };
 </script>
 

@@ -7,7 +7,9 @@ module.exports = {
         patterns: [
           { from: "src/assets/scss", to: "styles/" },
           { from: "src/plugins", to: "plugins/" },
-          { from: "src/store", to: "store/" }
+          { from: "src/store", to: "store/" },
+          { from: "src/services", to: "services/" },
+          { from: "src/utils", to: "utils/" }
         ],
       }),
     ],

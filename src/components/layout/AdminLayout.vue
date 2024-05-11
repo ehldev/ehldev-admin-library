@@ -1,17 +1,11 @@
 <template>
   <section class="admin-layout vh-100" :class="{ 'show-sidebar': showSidebar }">
     <div class="position-relative">
-      <AdminSidebar :showSidebar="showSidebar" @hide="showSidebar = false" :navItems="navItems">
+      <AdminSidebar :navItems="navItems">
         <template slot="sidebar-header">
           <slot name="sidebar-header"> </slot>
         </template>
       </AdminSidebar>
-
-      <div
-        class="overlay"
-        @click="showSidebar = false"
-        v-if="showSidebar"
-      ></div>
     </div>
 
     <main class="main" :class="{ 'show-sidebar': showSidebar }">
@@ -25,12 +19,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import AdminSidebar from "./AdminSidebar";
 
 export default {
   data() {
     return {
-      showSidebar: true,
     };
   },
   mounted() {
@@ -45,16 +40,24 @@ export default {
   methods: {
     calcResize() {
       screen.width < 1024
-        ? (this.showSidebar = false)
-        : (this.showSidebar = true);
+        ? this.changeSidebarStatus(false)
+        : this.changeSidebarStatus(true);
 
       window.addEventListener("resize", () => {
         screen.width < 1024
-          ? (this.showSidebar = false)
-          : (this.showSidebar = true);
+          ? this.changeSidebarStatus(false)
+          : this.changeSidebarStatus(true);
       });
     },
+    changeSidebarStatus(value) {
+      this.$store.commit('app/SET_SIDEBAR_STATUS', value)
+    }
   },
+  computed: {
+    ...mapGetters({
+      showSidebar: 'app/getSidebarStatus'
+    })
+  }
 };
 </script>
 
@@ -77,23 +80,10 @@ export default {
 
   .content {
     height: calc(100vh - 70px);
-    padding: 24px;
-  }
-
-  .overlay {
-    display: block;
-    background-color: rgba($admin-dark, 0.5);
-    position: fixed;
-    top: $header-height;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-    transition: all 0.3s;
-
-    @media (min-width: 992px) {
-      display: none;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px 24px 0 24px;
   }
 }
 </style>

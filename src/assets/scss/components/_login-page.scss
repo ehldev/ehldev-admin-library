@@ -1,0 +1,94 @@
+.login-page {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 35% 1fr;
+
+    .bg {
+        height: 100%;
+        background-image: url("https://res.cloudinary.com/ehldev/image/upload/v1680160050/ehldev-library/portada-login.webp");
+        background-size: cover;
+        background-position: center;
+        padding: 64px;
+
+        &::before {
+            content: "";
+            background-color: rgba($admin-dark, 0.5);
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+
+        &-title {
+            font-size: 3em;
+            font-weight: 700;
+            position: relative;
+        }
+    }
+
+    .content {
+        max-width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    .logo {
+        width: 150px;
+    }
+
+    .form-group {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba($admin-gray, 0.3);
+        border-radius: 8px;
+        padding: 8px 16px;
+
+        &-error {
+            border: 1px solid rgba($admin-red, 0.5);
+        }
+
+        .form-icon {
+            margin-right: 12px;
+        }
+
+        .fields {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        i {
+            font-size: 24px;
+            color: $admin-blue;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 400;
+            color: $admin-dark;
+            display: inline-block;
+            margin-bottom: 0;
+            // margin-bottom: 4px;
+        }
+
+        .form-field {
+            width: 100%;
+            height: 30px;
+            display: inline-block;
+            border: none;
+            outline: none;
+        }
+    }
+
+    .checkbox {
+        &-label {
+            font-size: 0.9em;
+            display: inline-block;
+        }
+    }
+}

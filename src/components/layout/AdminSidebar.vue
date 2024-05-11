@@ -7,13 +7,21 @@
     >
       <slot name="sidebar-header"></slot>
     </div>
-    <AdminNav :showSidebar="showSidebar" :items="navItems" @hideSidebar="$emit('hide')" />
+    <AdminNav :items="navItems" />
+
+    <div
+      class="overlay"
+      @click="changeSidebarStatus(false)"
+      v-if="showSidebar"
+    ></div>
   </aside>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 // import {AdminNav} from "ehldev-components-admin";
-import AdminNav from './AdminNav'
+import AdminNav from "./AdminNav";
 
 export default {
   data() {
@@ -26,8 +34,7 @@ export default {
     this.showHeader = true;
   },
   props: {
-    showSidebar: Boolean,
-    navItems: Array
+    navItems: Array,
   },
   components: {
     AdminNav,
@@ -49,6 +56,14 @@ export default {
         logoMini.style.display = "block";
       }
     },
+    changeSidebarStatus() {
+      this.$store.commit('app/SET_SIDEBAR_STATUS', !this.showSidebar)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      showSidebar: "app/getSidebarStatus",
+    }),
   },
 };
 </script>
@@ -112,7 +127,7 @@ export default {
   &-header {
     height: $header-height;
     // box-shadow: 0 2px 4px rgba(0, 0, 0, 8%);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -121,6 +136,22 @@ export default {
     &.active {
       justify-content: flex-start;
       padding: 18px;
+    }
+  }
+
+  .overlay {
+    display: block;
+    background-color: rgba($admin-dark, 0.5);
+    position: fixed;
+    top: $header-height;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    transition: all 0.3s;
+
+    @media (min-width: 992px) {
+      display: none;
     }
   }
 }

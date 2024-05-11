@@ -1,0 +1,65 @@
+.admin-button {
+    background-color: $admin-light;
+    font-size: 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+
+    &:disabled {
+        opacity: .7;
+    }
+
+    i {
+        margin-left: 8px;
+    }
+
+    &-green {
+        background-color: $admin-green;
+        color: white !important;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: $admin-green-dark;
+            color: white !important;
+            text-decoration: none;
+        }
+    }
+
+    &-blue {
+        background-color: rgba($admin-blue, 0.9);
+        color: white;
+
+        &:hover {
+            background-color: $admin-blue;
+        }
+    }
+
+    &-option {
+        background-color: white;
+
+        i {
+            font-size: 18px;
+            color: rgba($admin-dark, .85);
+        }
+    }
+
+    &-light {
+        background-color: $admin-light;
+        color: $admin-dark !important;
+    }
+
+    &-cancel {
+        &:hover {
+            color: $admin-red !important;
+        }
+
+        i {
+            margin-right: 8px;
+            margin-left: 0;
+        }
+    }
+}

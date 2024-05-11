@@ -6,7 +6,7 @@
       <button
         type="button"
         class="border-none bg-transparent p-0 mr-3 cursor-pointer"
-        @click="$emit('toggleSidebar')"
+        @click="changeSidebarStatus()"
       >
         <AdminToggleMenuIcon />
       </button>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import AdminSearch from '../common/AdminSearch'
 import AdminToggleMenuIcon from '../icons/AdminToggleMenuIcon'
 
@@ -46,7 +48,15 @@ export default {
         document.body.requestFullscreen();
       }
     },
+    changeSidebarStatus() {
+      this.$store.commit('app/SET_SIDEBAR_STATUS', !this.showSidebar)
+    }
   },
+  computed: {
+    ...mapGetters({
+      showSidebar: 'app/getSidebarStatus'
+    })
+  }
 };
 </script>
 

@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $admin-light;
+}
+
+a {
+    color: rgba($admin-blue, .9);
+    text-decoration: none;
+
+    &:hover {
+        color: $admin-blue;
+    }
+}
+
+button {
+    outline: none;
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+img {
+    max-width: 100%;
+}

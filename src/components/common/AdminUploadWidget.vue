@@ -1,6 +1,5 @@
 <template>
   <section class="admin-upload-widget">
-    
     <button
       type="button"
       class="preview-form-image upload-button d-flex flex-column main-shadow"
@@ -13,16 +12,16 @@
     </button>
 
     <div
-      class="preview-form-image position-relative main-shadow"
+      class="preview-form-image p-1 position-relative main-shadow"
       :class="{ error: showError }"
-      v-for="(item, index) in files"
+      v-for="(item, i) in files"
       :key="item.id"
     >
       <img :src="item.url" alt="" />
       <button
         type="button"
         class="remove-item d-flex align-items-center"
-        @click="removeItem(index)"
+        @click="removeItem(item, i)"
       >
         <i class="ri-close-circle-line"></i>
       </button>
@@ -36,10 +35,10 @@ export default {
   data() {
     return {
       cloudinaryConfig: {
-        cloudName: "ehldev",
-        uploadPreset: "ehldev",
-        language: "es",
-        folder: "ehldev",
+        // cloudName: process.env.VUE_APP_CLOUDINARY_CLOUD_NAME,
+        // uploadPreset: process.env.VUE_APP_CLOUDINARY_UPLOAD_PRESET,
+        // language: process.env.VUE_APP_CLOUDINARY_LANG,
+        // folder: this.folder,
         cropping: false,
         multiple: this.multipleFiles,
         text: {
@@ -83,25 +82,33 @@ export default {
     },
     maxFiles: Number,
     showError: Boolean,
-    oldFiles: Array
+    oldFiles: Array,
+    config: Object
   },
   watch: {
     oldFiles: function () {
-      if(!this.files.length) {
+      if (!this.files.length) {
         this.setOldList();
       }
     },
   },
   methods: {
     openImageWidget() {
+
+      let cloudinaryConfig = {
+        ...this.config,
+        ...this.cloudinaryConfig
+      }
+
       if (window.cloudinary) {
         let uploadWidget = window.cloudinary.createUploadWidget(
-          this.cloudinaryConfig,
+          cloudinaryConfig,
           (error, result) => {
             if (!error && result && result.event === "success") {
-              //   console.log("Done! Here is the image info: ", result.info);
+              // console.log("Done! Here is the image info: ", result.info);
+
               let image = {
-                id: result.info.asset_id,
+                id: result.info.public_id,
                 url: result.info.secure_url,
                 thumbnail_url: result.info.thumbnail_url,
                 path: result.info.path,
@@ -116,7 +123,7 @@ export default {
                 this.files[0] = file;
               }
 
-              this.files = [...this.files];
+              this.files = this.files.splice(0, this.maxFiles);
 
               this.$emit("success", this.files);
             }
@@ -126,14 +133,15 @@ export default {
         uploadWidget.open();
       }
     },
-    removeItem(index) {
-      this.files.splice(index, 1);
+    removeItem(item, i) {
+      this.files.splice(i, 1);
+      this.$emit('deleted', item.id)
     },
     setOldList() {
       let list = JSON.parse(JSON.stringify(this.oldFiles));
       this.files.push(...list);
-    }
-  },
+    },
+  }
 };
 </script>
 
@@ -168,6 +176,11 @@ export default {
       .upload-button {
         color: rgba($admin-blue, 0.9);
       }
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
     }
   }
 
